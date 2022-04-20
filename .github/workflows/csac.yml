@@ -32,7 +32,7 @@ on:
 
 env:
   REPO_URL: https://github.com/mrlong32/Openwrt
-  REPO_BRANCH: master
+  REPO_BRANCH: openwrt-22.03
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: open.config
   DIY_P1_SH: diy-part1.sh
