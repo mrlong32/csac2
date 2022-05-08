@@ -1,9 +1,9 @@
 name: OpenWrt CSAC CI
-on:
-  schedule:
-    - cron:  '0 10 * * *'
-  watch:
-    types: started
+#on:
+#  schedule:
+#    - cron:  '0 10 * * *'
+#  watch:
+#    types: started
 jobs:
   openwrt:	
     runs-on: ubuntu-20.04	
