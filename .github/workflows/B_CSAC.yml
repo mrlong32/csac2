@@ -2,9 +2,9 @@ name: B_CSAC
 on:
 #  schedule:
 #    - cron:  '0 10 * * *'
- repository_dispatch:
+# repository_dispatch:
  workflow_dispatch:
-    inputs:
+#    inputs:
       ssh:
         description: 'SSH connection to Actions'
         required: true
