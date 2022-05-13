@@ -1,4 +1,4 @@
-name: OpenWrt CSAC CI
+name: B_CSAC
 #on:
 #  schedule:
 #    - cron:  '0 10 * * *'
