@@ -2,6 +2,9 @@ name: B_CSAC
 on:
 #  schedule:
 #    - cron:  '0 10 * * *'
+ repository_dispatch:
+ workflow_dispatch:
+
   watch:
     types: started
 jobs:
