@@ -4,7 +4,11 @@ on:
 #    - cron:  '0 10 * * *'
  repository_dispatch:
  workflow_dispatch:
-
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: true
+        default: 'true'
   watch:
     types: started
 jobs:
