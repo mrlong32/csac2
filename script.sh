@@ -2,7 +2,7 @@
 
 # clone openwrt
 
-git clone -b openwrt-21.02 https://git.openwrt.org/openwrt/openwrt.git
+git clone -b openwrt-22.03 https://git.openwrt.org/openwrt/openwrt.git
 
 # version replace
 
@@ -20,7 +20,9 @@ cp csac.config .config
 
 # openwrt build dependencies
 
-make defconfig && make download -j8
+make defconfig 
+make menuconfig
+make download -j8
 
 # make openwrt source
 
