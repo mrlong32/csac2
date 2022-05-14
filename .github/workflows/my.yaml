@@ -1,0 +1,52 @@
+#安装依赖
+sudo apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
+
+#克隆源码
+git clone https://github.com/mrlong32/Openwrt
+#进入源码文件夹
+cd openwrt
+
+######添加自定义源（可选）##########
+cat >> feeds.conf.default <<EOF
+src-git kenzo https://github.com/kenzok8/openwrt-packages
+src-git passwall https://github.com/xiaorouji/openwrt-passwall
+src-git nas https://github.com/linkease/nas-packages.git
+EOF
+####################################
+
+#更新并安装feeds.conf.default中配置的源
+./scripts/feeds update -a && ./scripts/feeds install -a
+
+######添加 OpenAppFilter 应用过滤插件（可选）####
+#git clone https://github.com/destan19/OpenAppFilter package/OpenAppFilter
+#################################################
+
+######更改默认主题（可选）###########
+# 删除自定义源默认的 argon 主题
+#rm -rf package/lean/luci-theme-argon
+# 拉取 argon 原作者的源码
+#git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+# 替换默认主题为 luci-theme-argon
+#sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+#make menuconfig时记得勾选LuCI ---> Applications ---> luci-app-argon-config
+#####################################
+
+####设置路由器默认的管理地址为.5.1（可选）###
+sed -i 's/192.168.1.1/192.168.1.3/g' package/base-files/files/bin/config_generate
+#############################################
+
+#根据需要选插件
+make menuconfig
+#记得在Target Images适当扩大系统分区和镜像大小
+#系统分区，驱动或插件多的话需要适当扩大这个分区
+#(128) Kernel partition size (in MB)
+#文件系统分区，基本可以理解为安装后默认的/overlay分区大小
+#(512) Root filesystem partition size (in MB)
+
+#下载编译所需的软件包
+make download -j8 V=s
+
+#看看有没有没下完整的包，这是查看dl目录下有没有1k以下的文件，有的话建议删除重新下，很可能没下完整
+find dl -size -1024c -exec ls -l {} \;
+#删除
+find dl -size -1024c -exec rm -f {} \;
