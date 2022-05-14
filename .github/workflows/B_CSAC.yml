@@ -1,18 +1,21 @@
 name: B_CSAC
+env:
+  CONFIG_FILE: csac.config
 on:
   repository_dispatch:
   workflow_dispatch:
     inputs:
       ssh:
         description: 'SSH connection to Actions'
-        required: true
-        default: 'true'
-  watch:
-    types: started
+        required: flase
+        default: 'flase'
 jobs:
   openwrt:	
     runs-on: ubuntu-20.04	
     steps:	
+    - name: 00 - Load custom configuration
+      run: |
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
     - name: 01 - clone repository	
       uses: actions/checkout@v2	
     - name: 02 - system build dependencies	
