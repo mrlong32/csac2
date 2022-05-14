@@ -21,7 +21,6 @@ cp csac.config .config
 # openwrt build dependencies
 
 make defconfig 
-make menuconfig
 make download -j8
 
 # make openwrt source
