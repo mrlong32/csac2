@@ -8,12 +8,6 @@
 name: My CSAC
 
 on: 
-  release:
-    types: [published]
-
-  push:
-    branches: 
-      - master
   
   repository_dispatch:
   workflow_dispatch:
@@ -22,11 +16,7 @@ on:
         description: 'SSH connection to Actions'
         required: true
         default: 'true'
-  #schedule:
-  #  - cron: 0 8 * * 5
-  
-  watch:
-    types: [started]
+
 
 jobs:
   build:
@@ -91,9 +81,7 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
-#########
-make menuconfig
-##########
+        make menuconfig
     - name: Download package
       working-directory: ./openwrt
       run: |
