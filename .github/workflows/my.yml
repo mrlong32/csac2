@@ -91,7 +91,9 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
-        
+#########
+make menuconfig
+##########
     - name: Download package
       working-directory: ./openwrt
       run: |
