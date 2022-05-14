@@ -12,8 +12,6 @@ cd openwrt && sed -i 's/-SNAPSHOT/.1/g' include/version.mk
 
 ./scripts/feeds update -a && ./scripts/feeds install -a
 
-# copy build file and config
-
 # openwrt build dependencies
 
 make defconfig 
