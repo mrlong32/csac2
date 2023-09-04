@@ -1,0 +1,26 @@
+name: BU_CSAC
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: true
+        default: 'true'
+  watch:
+    types: started
+jobs:
+  openwrt:	
+    runs-on: ubuntu-20.04	
+    steps:	
+    - name: 01 - clone repository	
+      uses: actions/checkout@v2	
+    - name: 02 - system build dependencies	
+      run: sudo apt-get install subversion build-essential libncurses5-dev zlib1g-dev gawk git ccache gettext libssl-dev xsltproc zip
+    - name: 03 - configure & build
+      run: bash script.sh
+    - name: 04 - push to artifact file	
+      uses: actions/upload-artifact@v2	
+      with:	
+        name: csac-framework
+        path: openwrt/bin/targets/ath79/
