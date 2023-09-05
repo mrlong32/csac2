@@ -2,7 +2,7 @@
 
 # clone openwrt
 
-git clone -b openwrt-22.03 https://git.openwrt.org/openwrt/openwrt.git
+git clone -b openwrt-23.05.0-rc3 https://git.openwrt.org/openwrt/openwrt.git
 
 # version replace
 
