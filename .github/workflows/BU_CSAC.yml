@@ -1,4 +1,6 @@
 name: BU_CSAC
+env:
+  CONFIG_FILE: csac.config
 on:
   repository_dispatch:
   workflow_dispatch:
